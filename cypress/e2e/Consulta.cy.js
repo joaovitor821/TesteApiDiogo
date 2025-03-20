@@ -1,5 +1,5 @@
 describe('Teste de Login', () => {
-    it.only('Deve fazer login com credenciais válidas', () => {
+    it('Deve fazer login com credenciais válidas', () => {
        
       //Login
       cy.visit('http://172.23.15.11:4200/login'); 
@@ -48,6 +48,7 @@ describe('Teste de Login', () => {
         cy.get('select').select('MIX101 - Crédito: 1');
         cy.contains('Consultar').click();
 
+        cy.contains('CNPJ inválido. Verifique o valor informado.').should('be.visible');
 
     });
 });

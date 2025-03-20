@@ -23,6 +23,6 @@ describe('Teste de Login', () => {
         cy.contains('Login').click();
 
         // Verifica se aparece uma mensagem de erro
-        cy.contains('Credenciais inválidas').should('be.visible');
+        cy.contains('Login ou senha incorretos').should('be.visible');
     });
 });
