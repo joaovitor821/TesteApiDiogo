@@ -12,5 +12,8 @@
   "type": "commonjs",
   "dependencies": {
     "cypress": "^14.2.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8"
   }
 }

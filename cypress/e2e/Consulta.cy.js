@@ -19,8 +19,8 @@ describe('Teste de Login', () => {
         //Consulta online
         cy.get('#documento').type('04377324000102');
         cy.get('select').select('MIX101 - Crédito: 1');
-        cy.contains('Consultar').click();
 
+        
 
     });
 });

@@ -12,14 +12,15 @@ describe('Teste de Login', () => {
         // Verifica se foi redirecionado após login
         cy.url().should('not.include', '/login');
 
-        //Entrar em lote
-        cy.get(':nth-child(2) > .mdc-button__label').click();
-        cy.get('.menu-item-lote').click();
+        //Entrar em gerenciamento de usuario 
+        cy.get(':nth-child(4) > .mdc-button__label').click();
+        cy.get('.menu-item-myUsers').click();
 
-        //Consulta lote
-        cy.get('mat-label.ng-tns-c508571215-8').click(); 
-        cy.contains('MIX101 - Crédito: 1').click(); 
-        cy.get('input[type="file"]').attachFile('326.csv');
-        cy.get('[ng-reflect-ng-class="[object Object]"] > .mdc-button__label').click()        
-    });
+        //Verificação dos usuarios
+        cy.get(':nth-child(2) > .cdk-column-opcoes > .mdc-icon-button > .mat-icon').click();
+        cy.get('.mat-mdc-select-placeholder')/
+        cy.get('.mat-mdc-select-placeholder')
+
+
+   });
 });
