@@ -17,10 +17,32 @@ describe('Teste de Login', () => {
         cy.get('.menu-item-myUsers').click();
 
         //Verificação dos usuarios
-        cy.get(':nth-child(2) > .cdk-column-opcoes > .mdc-icon-button > .mat-icon').click();
-        cy.get('.mat-mdc-select-placeholder')/
-        cy.get('.mat-mdc-select-placeholder')
+        cy.contains('batatinhafrita123@mail.com')
+        .parent()
+        .find('button')
+        .contains('edit')
+        .click()
 
+      cy.get('.mat-mdc-form-field-infix')
+        .contains('Role')
+        .parent()
+        .click();
 
+      cy.get('mat-option').contains('Usuário Gestor').click()
+      cy.contains('Salvar').click()
+
+      cy.contains('batatinhafrita123@mail.com')
+        .parent()
+        .find('button')
+        .contains('edit')
+        .click()
+
+      cy.get('.mat-mdc-form-field-infix')
+        .contains('Role')
+        .parent()
+        .click();
+
+      cy.get('mat-option').contains(/^Usuário$/).should('be.visible').click()
+      cy.contains('Salvar').click()
    });
 });

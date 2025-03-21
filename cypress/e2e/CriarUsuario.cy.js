@@ -1,30 +1,41 @@
-describe('Teste de Login', () => {
-    it('Deve fazer login com credenciais válidas', () => {
-       
-      //Login
-      cy.visit('http://172.23.15.11:4200/login'); 
+import { faker } from '@faker-js/faker';
 
-        cy.get('#mat-input-0').type('gestor@mail.com');
-        cy.get('#mat-input-1').type('Admin@123');
-        
-        cy.contains('Login').click();
+describe('Teste de Login e Criação de Usuário', () => {
+  
+  it('Deve fazer login e criar um usuário várias vezes', () => {
 
-        // Verifica se foi redirecionado após login
-        cy.url().should('not.include', '/login');
+    // Quantidade de testes que você quer fazer 
+    Cypress._.times(10, () => { 
 
-        //Entrar em gerenciamento de usuario 
-        cy.get(':nth-child(4) > .mdc-button__label').click();
-        cy.get('.menu-item-createrUser').click();
+      // Realizando o login
+      cy.visit('http://172.23.15.11:4200/login');
+      cy.get('#mat-input-0').type('gestor@mail.com');  // Usuário de login
+      cy.get('#mat-input-1').type('Admin@123');       // Senha de login
+      cy.contains('Login').click();
 
-        //Criação de conta
-        cy.get('.mat-mdc-form-field.ng-tns-c508571215-8 > .mat-mdc-text-field-wrapper').type('Tsete2');
-        cy.get('.mat-mdc-form-field.ng-tns-c508571215-9 > .mat-mdc-text-field-wrapper').type('batatinhafrita123@mail.com');
-        cy.get('.mat-mdc-form-field.ng-tns-c508571215-10 > .mat-mdc-text-field-wrapper').type('Admin@123');
-        cy.get('.mat-mdc-form-field-infix')
+      // Navegar para a seção de gerenciamento de usuários
+      cy.get(':nth-child(4) > .mdc-button__label').click();
+      cy.get('.menu-item-createrUser').click();
+
+      // Gerando dados aleatórios para criar um login diferente para cada tentativa
+      const nomeAleatorio = faker.name.firstName();  // Nome aleatório
+      const emailAleatorio = faker.internet.email(); // Email aleatório
+
+      cy.get('.mat-mdc-form-field.ng-tns-c508571215-8 > .mat-mdc-text-field-wrapper')
+        .type(nomeAleatorio);
+      cy.get('.mat-mdc-form-field.ng-tns-c508571215-9 > .mat-mdc-text-field-wrapper')
+        .type(emailAleatorio);
+      cy.get('#mat-input-4').type('Admin@123');
+
+      cy.get('.mat-mdc-form-field-infix')
         .contains('Role')
         .parent()
         .click();
-        cy.get('mat-option').contains('Usuário').click()
-        cy.get('.mat-mdc-card-actions').click();
+      cy.get('mat-option').contains('Usuário').click();
+      cy.get('.mat-mdc-card-actions').click();
+
+      // Verificando se a criação do usuário foi bem-sucedida
+      cy.contains('Conta criada com sucesso!').should('be.visible');
     });
+  });
 });
