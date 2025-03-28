@@ -11,6 +11,7 @@ describe.only('Teste de Login', () => {
 
         // Verifica se foi redirecionado após login
         cy.url().should('not.include', '/login');
+        cy.contains('Bem-vindo ao Portal Deps').should('be.visible');
 
         //Entrar na consulta
         cy.get(':nth-child(2) > .mdc-button__label').click();
